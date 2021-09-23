@@ -14,7 +14,7 @@ RUN ls -l && \
 
 FROM alpine:latest
 RUN mkdir -p /app/static
-COPY --from=builder /app/app /app/sso
+COPY --from=builder /app/app /app/app
 ADD static /app/static
 WORKDIR /app
 ENTRYPOINT [ "./app", "run" ]
