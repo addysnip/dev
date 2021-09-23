@@ -21,7 +21,7 @@ package main
 import (
 	"os"
 
-	"github.com/dhawton/hawton.io/internal/server"
+	"github.com/dhawton/hawton.dev/internal/server"
 	"github.com/dhawton/log4g"
 	"github.com/urfave/cli/v2"
 )

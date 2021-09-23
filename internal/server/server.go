@@ -23,7 +23,7 @@ import (
 	"os"
 
 	"github.com/common-nighthawk/go-figure"
-	"github.com/dhawton/hawton.io/internal/middleware"
+	"github.com/dhawton/hawton.dev/internal/middleware"
 	"github.com/dhawton/log4g"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
