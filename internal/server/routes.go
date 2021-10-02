@@ -36,7 +36,11 @@ func SetupRoutes() {
 				"pkg":        c.Param("pkg"),
 			})
 		} else {
-			c.Redirect(302, "https://github.com/dhawton")
+			if c.Param("pkg") == "ping" {
+				c.String(200, "PONG")
+			} else {
+				c.Redirect(302, "https://github.com/dhawton")
+			}
 		}
 	})
 }
