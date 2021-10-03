@@ -1,10 +1,14 @@
 kind: pipeline
+type: kubernetes
 name: build and deploy
 
 steps:
 - name: test build
-  image: 
-- name: build/deploy
+  image: golang:1.16
+  commands:
+  - go vet
+  - go build
+- name: build and push image
   image: plugins/docker
   settings:
     username:
@@ -13,13 +17,25 @@ steps:
       from_secret: DOCKER_PASSWORD
     repo: addysnip/dev
     tags:
-    - latest
     - ${DRONE_COMMIT_SHA:0:8}
-    - ${DRONE_TAG}
   when:
     event:
     - push
-    ref:
-    - refs/head/main
-    - refs/tags/*
-
+    branch:
+    - main
+- name: deploy to cluster
+  pull: always
+  image: dhawton/drone-kubectl:latest
+  settings:
+    kubernetes_token:
+      from_secret: kubernetes_token
+    kubernetes_server:
+      from_secret: kubernetes_server
+  commands:
+  - kubectl set image deployment/addysnipdev addysnipdev=addysnip/dev:${DRONE_COMMIT_SHA:0:8} -n addysnip
+  - kubectl rollout status deployment/addysnipdev -n addysnip
+  when:
+    event:
+    - push
+    branch:
+    - main
