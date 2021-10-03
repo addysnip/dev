@@ -38,7 +38,7 @@ var log = log4g.Category("server")
 var server *Server
 
 func Run(port int) {
-	intro := figure.NewFigure("hawton.dev", "", false).Slicify()
+	intro := figure.NewFigure("addysnip.dev", "", false).Slicify()
 	for i := 0; i < len(intro); i++ {
 		log.Info(intro[i])
 	}

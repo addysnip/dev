@@ -31,7 +31,7 @@ func SetupRoutes() {
 	server.engine.GET("/:pkg", func(c *gin.Context) {
 		if val, exists := c.GetQuery("go-get"); exists && val == "1" {
 			c.HTML(200, "go-get.tmpl", gin.H{
-				"alias_base": utils.Getenv("ALIAS_BASE", "hawton.dev"),
+				"alias_base": utils.Getenv("ALIAS_BASE", "addysnip.dev"),
 				"git_base":   utils.Getenv("BASE_GO_GET_URL", "https://github.com/dhawton"),
 				"pkg":        c.Param("pkg"),
 			})
